@@ -1,4 +1,4 @@
-[kino.razor](#) - An asp.net mvc Razor style JavaScript template tool.
+[kino.razor](#) - Razor style javascript template tool.
 ==================================================
 How to use
 --------------------------------------
