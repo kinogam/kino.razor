@@ -2,7 +2,7 @@
 ==================================================
 How to use
 --------------------------------------
-you can pass two parameters kino.razor then get a converted string:
+you can pass two parameters to kino.razor then get a converted string:
 ```js
 	var str = kino.razor("Hey, @name!", { name: 'kino' });
 	//result: "Hey, kino!"
