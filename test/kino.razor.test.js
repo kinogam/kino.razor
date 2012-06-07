@@ -135,12 +135,13 @@ test("fix bug with ')'", function () {
 });
 
 test("use custom symbol instead of '@'", function () {
-    //use the symbols except the key word in regex
     kino.razor.use("&");
     var str = kino.razor("&name@&email", { name: "kinogam", email: "gmail.com" });
     equal(str, "kinogam@gmail.com");
 
-    kino.razor.use("%");
-    var str = kino.razor("%name@%email", { name: "hello", email: "gmail.com" });
+    kino.razor.use("$");
+    var str = kino.razor("$name@$email", { name: "hello", email: "gmail.com" });
     equal(str, "hello@gmail.com");
+
+
 });
