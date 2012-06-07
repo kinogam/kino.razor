@@ -2,6 +2,12 @@
 
 /// <reference path="../qunit/qunit.js" />
 
+module("razor", {
+    setup: function () {
+        kino.razor.use('@');
+    }
+});
+
 test("should convert single viariable", function () {
     var str = kino.razor("Hey, @name!", { name: 'kino' });
     equal(str, "Hey, kino!");
@@ -126,4 +132,15 @@ test("It should use new XXX() as variable", function () {
 test("fix bug with ')'", function () {
     var str = kino.razor("Address:(@Address)", { Address: "test load" });
     equal(str, "Address:(test load)");
+});
+
+test("use custom symbol instead of '@'", function () {
+    //use the symbols except the key word in regex
+    kino.razor.use("&");
+    var str = kino.razor("&name@&email", { name: "kinogam", email: "gmail.com" });
+    equal(str, "kinogam@gmail.com");
+
+    kino.razor.use("%");
+    var str = kino.razor("%name@%email", { name: "hello", email: "gmail.com" });
+    equal(str, "hello@gmail.com");
 });
