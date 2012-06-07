@@ -2,6 +2,12 @@
 ==================================================
 How to use
 --------------------------------------
+
+install in node.js
+```js
+	npm install razor
+```
+
 you can pass two parameters to kino.razor then get a converted string:
 ```js
 	var str = kino.razor("Hey, @name!", { name: 'kino' });
