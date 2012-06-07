@@ -1,14 +1,18 @@
-﻿{
-  "name":           "razor",
-  "repository": "git://github.com/kinogam/kino.razor"
-  "version":        "0.6.7",
-  "description":    "razor style javascript template tool",
-  "author":         "kinogam <kinogam@gmail.com> (http://www.kinogam.com)",
+{
+  "author": "kinogam <kinogam@gmail.com> (http://github.com/kinogam)",
+  "name": "razor",
+  "description": "razor style javascript template tool",
+  "version": "0.6.7",
+  "homepage": "http://www.kinogam.com",
   "repository": {
     "type": "git",
     "url": "git://github.com/kinogam/kino.razor.git"
   },
+  "main": "./lib/kino.razor.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
   "engines": {
-    "node":         ">= 0.6.0"
+    "node": "*"
   }
 }
