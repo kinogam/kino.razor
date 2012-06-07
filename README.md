@@ -8,6 +8,11 @@ install in node.js
 	npm install razor
 ```
 
+require js
+```js
+var razor = require("razor");
+```
+
 you can pass two parameters to kino.razor then get a converted string:
 ```js
 	var str = kino.razor("Hey, @name!", { name: 'kino' });
