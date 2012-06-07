@@ -70,8 +70,11 @@ use @Html.cscape for escape string to html
 
 use custom symbol instead of '@'
 ```js
-    //use the symbols except the key word in regex
     kino.razor.use("&");
     var str = kino.razor("&name@&email", { name: "kinogam", email: "gmail.com" });
+    //"kinogam@gmail.com"
+
+	kino.razor.use("$");
+    var str = kino.razor("$name@$email", { name: "kinogam", email: "gmail.com" });
     //"kinogam@gmail.com"
 ```
