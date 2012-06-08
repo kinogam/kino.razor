@@ -65,7 +65,7 @@ loop, like while and for
 	//result: "<span>2</span><span>1</span><span>0</span>"
 ```
 
-use @Html.cscape for escape string to html
+use @Html.escape for escape string to html
 ```js
     var templateStr = "<input yyy='@Html.escape(test)' xxx=\"@Html.escape(otherAttr)\" />";
     var str = kino.razor(templateStr, { test: "kino's test", otherAttr: "\"one more test\"" });
