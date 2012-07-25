@@ -1,7 +1,18 @@
-[kino.razor](#) - Razor style javascript template tool.
+[kino.razor](#) - an easy to use,razor style javascript template tool 
 ==================================================
 How to use
 --------------------------------------
+
+install in node.js
+```js
+	npm install razor
+```
+
+require js
+```js
+var razor = require("razor");
+```
+
 you can pass two parameters to kino.razor then get a converted string:
 ```js
 	var str = kino.razor("Hey, @name!", { name: 'kino' });
@@ -54,7 +65,7 @@ loop, like while and for
 	//result: "<span>2</span><span>1</span><span>0</span>"
 ```
 
-use @Html.cscape for escape string to html
+use @Html.escape for escape string to html
 ```js
     var templateStr = "<input yyy='@Html.escape(test)' xxx=\"@Html.escape(otherAttr)\" />";
     var str = kino.razor(templateStr, { test: "kino's test", otherAttr: "\"one more test\"" });
