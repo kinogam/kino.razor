@@ -145,3 +145,8 @@ test("use custom symbol instead of '@'", function () {
 
 
 });
+
+test("should use style like @(name)", function () {
+    var str = kino.razor("Hey, zzz@(name)zzz!", { name: 'kino' });
+    equal(str, "Hey, zzzkinozzz!");
+});
