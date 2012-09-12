@@ -150,3 +150,8 @@ test("should use style like @(name)", function () {
     var str = kino.razor("Hey, zzz@(name)zzz!", { name: 'kino' });
     equal(str, "Hey, zzzkinozzz!");
 });
+
+test("@(i) style should support operation", function () {
+    var str = kino.razor("@(i+1)", { i: 1 });
+    equal(str, "2");
+});
