@@ -72,9 +72,9 @@ use @Html.escape for escape string to html
 	//result: "<input yyy='kino&#x27;s test' xxx=\"&quot;one more test&quot;\" />"
 ```
 
-@@, @} will be escaped as @, }(maybe will be fixed in next version)
+@@ will be escaped as @
 ```js
-    var templateStr = "{@name@@gmail.com@}";
+    var templateStr = "{@name@@gmail.com}";
     var str = kino.razor(templateStr, { name: 'kino' });
 	//result: '{kino@gmail.com}'
 ```
