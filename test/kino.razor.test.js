@@ -1,6 +1,6 @@
-﻿/// <reference path="../../kino.razor.js" />
+﻿/// <reference path="../lib/kino.razor.js" />
+/// <reference path="qunit/qunit.js" />
 
-/// <reference path="../qunit/qunit.js" />
 
 module("razor", {
     setup: function () {
@@ -18,16 +18,8 @@ test("multiple variables", function () {
     equal(str, "Hey, 1, 2, 3!");
 });
 
-//will not raises error again!!
-//test("missing value raises exception", function () {
-//    raises(function () {
-//        var templateStr = "Hey, @xxx";
-//        var str = kino.razor(templateStr, {});
-//    }, "a variable was left without a value!");
-//});
-
 test("handle missing vlaue", function () {
-    var templateStr = "Hey, @xxx";
+    var templateStr = "Hey, @abc";
     var str = kino.razor(templateStr, {});
     equal(str, "Hey, ");
 });
@@ -44,7 +36,7 @@ test("javascript block test", function () {
 });
 
 test("condition syntax test", function () {
-    var templateStr = "@if(1==0){<span>if you see this word,your test is failed</span>}";
+    var templateStr = "@if(1==0){<span>if you see this words,your test was failed!</span>}";
     var str = kino.razor(templateStr, {});
     equal(str, "");
 
@@ -57,7 +49,7 @@ test("condition syntax test", function () {
     equal(str, 'kino');
 });
 
-test("@if @for @while test", function () {
+test("loop test", function () {
     var templateStr = "@for(var i = 0; i < 3; i++){<span>@i</span>}";
     var str = kino.razor(templateStr, {});
     equal(str, "<span>0</span><span>1</span><span>2</span>");
@@ -82,13 +74,6 @@ test("array param test", function () {
     equal(str, "<span>1</span><span>2</span><span>3</span>");
 });
 
-//test("do not escape", function () {
-//    var templateStr = "<input @attr />@content";
-//    var str = kino.razor(templateStr, { attr: "style='display:none'", content: "<span>hello</span>" }, {
-//        enableEscape: false
-//    });
-//    equal(str, "<input style='display:none' /><span>hello</span>");
-//});
 
 test("mixture test", function () {
     var str = "<select>";
@@ -108,7 +93,7 @@ test("mixture test", function () {
 
 
 test("Given '@@' and '@}' then it should out put '@' and '}' character", function () {
-    var templateStr = "{@name@@gmail.com@}";
+    var templateStr = "{@name@@gmail.com}";
     var str = kino.razor(templateStr, { name: 'kino' });
     equal(str, '{kino@gmail.com}');
 });
