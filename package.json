@@ -2,7 +2,7 @@
   "author": "kinogam <kinogam@gmail.com> (http://github.com/kinogam)",
   "name": "razor",
   "description": "razor style javascript template tool",
-  "version": "0.6.7",
+  "version": "0.8.0",
   "homepage": "http://www.kinogam.com",
   "repository": {
     "type": "git",
