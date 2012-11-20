@@ -2,6 +2,12 @@
 ==================================================
 How to use
 --------------------------------------
+use in webpage
+```html
+	<script type="text/javascript" src="kino.razor.js"></script>
+	//or minjs
+	<script type="text/javascript" src="kino.razor-min.js"></script>
+```
 
 install in node.js
 ```js
