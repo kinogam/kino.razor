@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script src="lib/kino.razor.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var div = document.getElementsByTagName("div")[0];
+
+            div.innerHTML = kino.razor(document.getElementById("temp-hotelhistory").innerHTML, {
+                data: [
+                    { name: '123', url: '123xxxxxxxxxx.html' },
+                    { name: '456', url: '456xxxxxxxxxx.html' },
+                    { name: '789', url: '789xxxxxxxxxx.html' },
+                    { name: 'abc', url: 'abcxxxxxxxxxx.html' }
+                ]
+            });
+
+        };
+    </script>
+</head>
+<body>
+<div>
+</div>
+
+<script type="text/template" id="temp-hotelhistory">
+<div class="box">
+<div class="hd">
+
+    <h3>view history</h3>
+</div>
+<div class="bd">
+    <ul>
+    @for(var i = data.length - 1; i >= 0; i--){
+        @{var name = data[i].name.length > 10? data[i].name.substr(0, 10) + '...' : data[i].name;}
+        <li><a title="data[i].name" href="@data[i].url">@name</a><span><a href="javascript:void(0)" onclick="HotelHistory.remove({name:'@data[i].name'@});">×</a></span></li>
+    }
+    </ul>
+</div>
+</div>
+</script>
+</body>
+</html>

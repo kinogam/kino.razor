@@ -93,9 +93,13 @@ test("mixture test", function () {
 
 
 test("Given '@@' and '@}' then it should out put '@' and '}' character", function () {
-    var templateStr = "{@name@@gmail.com}";
+    var templateStr = "{@name@@gmail.com@}";
     var str = kino.razor(templateStr, { name: 'kino' });
     equal(str, '{kino@gmail.com}');
+
+    var templateStr2 = "{hello @@ and @}}";
+    var str2 = kino.razor(templateStr2, { name: 'kino' });
+    equal(str2, '{hello @ and }}');
 });
 
 test("pass one parameter to kino.razor() should return a template function", function () {
