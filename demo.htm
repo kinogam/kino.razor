@@ -34,7 +34,7 @@
     <ul>
     @for(var i = data.length - 1; i >= 0; i--){
         @{var name = data[i].name.length > 10? data[i].name.substr(0, 10) + '...' : data[i].name;}
-        <li><a title="data[i].name" href="@data[i].url">@name</a><span><a href="javascript:void(0)" onclick="HotelHistory.remove({name:'@data[i].name'@});">×</a></span></li>
+        <li><a title="@data[i].name" href="@data[i].url">@name</a><span><a href="javascript:void(0)" onclick="HotelHistory.remove({name:'@data[i].name'@});">×</a></span></li>
     }
     </ul>
 </div>
