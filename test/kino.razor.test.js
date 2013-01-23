@@ -118,10 +118,7 @@ test("It should use new XXX() as variable", function () {
     equal(/^now\sis\s\d+$/.test(str), true);
 });
 
-test("fix bug with ')'", function () {
-    var str = kino.razor("Address:(@Address)", { Address: "test load" });
-    equal(str, "Address:(test load)");
-});
+
 
 test("use custom symbol instead of '@'", function () {
     kino.razor.use("&");
@@ -143,4 +140,23 @@ test("should use style like @(name)", function () {
 test("@(i) style should support operation", function () {
     var str = kino.razor("@(i+1)", { i: 1 });
     equal(str, "2");
+});
+
+
+module("bug fix", {
+    setup: function () {
+        kino.razor.use("@");
+    }
+});
+
+
+test("fix bug with ')'", function () {
+    var str = kino.razor("Address:(@Address)", { Address: "test load" });
+    equal(str, "Address:(test load)");
+});
+
+test("support variable name like @rid_child", function () {
+    var templateStr = "@{var r_child_id = 'rid_1';}<hello>@r_child_id</hello>";
+    var result = kino.razor(templateStr, {});
+    equal(result, "<hello>rid_1</hello>");
 });
