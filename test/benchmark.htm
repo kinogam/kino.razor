@@ -1,0 +1,153 @@
+﻿ <!DOCTYPE html>
+<html>
+<head>
+    <title>benchmark</title>
+    <script src="../lib/kino.razor.js"></script>
+    <script src="testFlightData.js"></script>
+    <script src="benchmark.js"></script>
+</head>
+<body>
+    <div id="benchmark_panel"></div>
+
+    <script id="temp_flight_list" type="text/template">
+		@for(var i = 0; i < flightInfo.length; i++){
+            @{
+                var item = flightInfo[i];
+				
+            }
+		<li>
+		 <table class="list">
+            <thead>
+            
+            
+            
+            
+            @for(var j = 0; j < item.LstDetailInfo.length; j++){
+            @{
+                var itemDetail = item.LstDetailInfo[j];
+            }
+            <tr>
+            
+                
+                
+                <th class="time_airport_col">
+                    @if(j == 0){
+					<div class="from"> 
+						<span class="time">@item.DepartureTime </span> 
+						<span class="addr">@item.FromCity<span>@item.BoardPointAT</span></span> 
+					</div>
+					<div class="to"> 
+						<span class="time">@item.ArrivalTime </span> 
+						<span class="addr">@item.ToCity<span>@item.OffPointAT</span></span> 
+					</div>
+					}
+				</th>
+                <th class="air_space_col">
+                    @if(j == 0){
+					<div class="airline"> 
+						<span class="flight_ico pubFlights_@item.CarrierEn"></span> 
+						<span class="flight_name">@item.Carrier</span> 
+						<span class="airline_name">@item.FlightNO</span> 
+					</div>
+					<div class="air_module"> 					
+						<span><span>机型：</span><span class="airtype h_l_l_5 flight_models" method="GetAircraft" parms="@item.Aircraft">@item.Aircraft</span></span>
+						<span>@itemDetail.ClassName</span>                        
+					</div>
+					}
+				</th>
+				
+                <th class="price_discounts_col"> 
+					<div class="price_row"> 
+						<span class="price">¥@getShowPrice(itemDetail.Price, itemDetail.Reward, itemDetail.RewardType)</span> 
+                        
+                        <div class="sp_disc">
+                        @if(itemDetail.IsShow=='True') {
+                            @{
+                                var caibeiReward = Math.floor(itemDetail.Reward*parseInt(itemDetail.ConvertRatio)/100);
+                            }
+                            <span class="caibei" @if(caibeiReward==0){style="display:none;"}><%=Utiltity.CurChannelMemberInfo.ChannelMemberRule.Description + Utiltity.CurChannelMemberInfo.ChannelMemberRule.ShowName + Utiltity.CurChannelMemberInfo.ChannelMemberRule.ShowSymbol%>@caibeiReward <%=Utiltity.CurChannelMemberInfo.ChannelMemberRule.ShowUnit%></span> 
+                        }
+                        
+                        @if(itemDetail.IsLapse != '0|'){
+                            @{
+                                var message = itemDetail.IsLapse.split('|')[1];
+                            }
+                            <span class="preferential_type_2 js_sp_disc_3 lapse" message="@message">直减优惠</span>
+                        }
+                        
+                        @if(itemDetail.IsAddService != '0|'){
+                            @{
+                                var message = itemDetail.IsAddService.split('|')[1];
+                            }
+                            <span class="preferential_type_3 js_sp_disc_3 lapse" message="@message">纵横有礼</span>
+                        }
+                        @if(itemDetail.PolicyType == '4'){
+                            <span class="preferential_type_1 js_sp_disc_3  k-cabin" message="该舱位需向航空公司申请，不能保证一定有位。预订该舱位需要较长的确认时间。该舱位退改签有较多限制，具体请查看退改签规定。">低价申请</span>
+                        }
+                        </div>
+                        
+                </div>
+					</div>
+					<div class="discount"> 
+						<span>@getDiscount(item,itemDetail)</span>
+						<a class="h_l_l_5 check_back" method="GetPolicyChangeAndRefund" parms='@item.FromCityCode,@item.ToCityCode,@item.DepartureDate,@item.CarrierEn,@itemDetail.Class,@itemDetail.DiscountValue' >退改签</a>
+                                          
+					</div>
+				</th>
+                <th class="operation_col"> 
+					@{
+                        var btnClassName = itemDetail.PolicyType == '4'? 'btn_3' : 'btn_4';
+                        var _buttonValue = itemDetail.PolicyType == '4'? buttonValue.replace(/预订|选定/, '申请'): buttonValue;
+                    }
+            
+                    <a href="javascript:;" class="@btnClassName booking_btn btn-booking" data-start-time="@item.DepartureDate @item.DepartureTime" data-subkey="@itemDetail.FlightNo|@itemDetail.Class|@itemDetail.Supplier|@itemDetail.PolicyID">@_buttonValue</a>
+            
+					@if(j == item.LstDetailInfo.length - 1){					
+					<a href="javascript:;" class="unfold" data-type="moreCabin" data-number="@item.Number">
+						<span class="btn_text">更多舱位</span><span class="arrow"></span>
+					</a> 					
+					<a class="list_loading" style="display:none;"></a>
+					}
+				</th>
+                <th class="remark_col">
+                    @if(item.ViaPort != "0"){
+			            @{
+			                var viaPortStr = (item.IsShare == '0' ? item.FlightNO : item.SFlightNO) + ',' + item.DepartureDate;
+			            }
+			            <a class="stop_over h_l_l_5" divWidth="300px" method="GetViaPort" parms="@viaPortStr">经停</a>
+			        }
+    			    
+			        @if(itemDetail.Nums != 'A'){
+			            <span class="ticket_state_2">剩余@itemDetail.Nums张</span>
+			        }   	
+    			    
+			        @if( !(itemDetail.ClassDescribe == null || itemDetail.ClassDescribe == '') ){
+			            <a class="h_l_l_5 clear_style flightspace" method="GetClassInfo" parms="@itemDetail.ClassDescribe,@item.CarrierEn,@itemDetail.Class" >
+			            <span class="ticket_state_1">@itemDetail.ClassDescribe</span></a>
+			        }
+                </th>                
+            </tr>
+            
+            }
+            
+            
+            
+            </thead>
+			<tbody class="moreinfo unfold" id="tbody_@item.Number">
+			</tbody>
+            <tfoot class="sub_foot">
+            <tr class="sub_description">
+                <td colspan="3">                        
+                    <span class="ext_cost">机建＋燃油：@parseInt(item.AirdromeFee) + @parseInt(item.OilTax)元</span>
+                    <span class="fly_time">飞行时间： @getFlyTimeStr(item.DepartureDate, item.DepartureTime, item.ArrivalDate, item.ArrivalTime)</span>
+                    <span class="dinner">@if(item.Meal != null || item.Meal != ''){有配餐}else{无配餐}</span>
+                </td>
+                <td colspan="2"></td>
+            </tr>
+            </tfoot>
+        </table>
+        </li>
+		}
+    </script>
+</body>
+</html>
