@@ -2,6 +2,12 @@
 ==================================================
 How to use
 --------------------------------------
+
+use bower
+```js
+    bower install razor --save
+```
+
 use on a webpage
 ```html
 	<script type="text/javascript" src="kino.razor.js"></script>
