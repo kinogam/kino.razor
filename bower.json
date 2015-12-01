@@ -1,0 +1,23 @@
+{
+  "name": "kino.razor",
+  "version": "0.8.0",
+  "homepage": "https://github.com/kinogam/kino.razor",
+  "authors": [
+    "kinogam <kinogam@gmail.com>"
+  ],
+  "description": "razor style javascript template tool",
+  "main": "./lib/kino.razor.js",
+  "keywords": [
+    "razor",
+    "javascript",
+    "template"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
