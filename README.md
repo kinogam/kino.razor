@@ -100,7 +100,7 @@ use custom symbol instead of '@'
 	kino.razor.use("$");
     var str = kino.razor("$name@$email", { name: "kinogam", email: "gmail.com" });
     //"kinogam@gmail.com"
-```
+``` 
 support style @(name):
 ```js
 	var str = kino.razor("Hey, zz@(name)zz!", { name: 'kino' });
